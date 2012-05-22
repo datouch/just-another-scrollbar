@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		body, html {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+
+		.overtop {
+			position: relative;
+			height: 300px;
+			width: 200px;
+		}
+
+		.container {
+			overflow: hidden;
+			height: 100%;
+			border: 1px solid black;
+		}
+
+		.content {
+			width: 200px;
+			margin: 0 auto;
+			top: 0;
+			position: relative;
+		}
+
+		.track {
+			width: 7px;
+			background: rgba(0,0,0, 0.5);
+			height: 10px;
+			border-radius: 5px;
+			position: absolute;
+			top: 1px;
+			right: 2px;
+			display: none;
+		}
+
+		.trackHolder {
+			position: absolute;
+			top: 0;
+			right: 0;
+			height: 100%;
+			width: 20px;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/jquery.mousewheel.js" ></script>
+	<script type="text/javascript">
+	tid = 0;
+	setupScroll = function(){
+
+		var $target = $('.overtop');
+		$('<div class="trackHolder" ><div class="track" ></div></div>').appendTo($target.not(':has(.trackHolder)'));
+		$('.track').unbind();
+		$('.container, .trackHolder').unbind();
+
+		$target.each(function(index, elem){
+			var $elem = $(elem),
+					$track = $elem.find('.track'),
+					$content = $elem.find('.content'),
+					$container = $elem.find('.container'),
+					ratio = $container.height()/$content.height(),
+					tid = 0;
+			$track.height(ratio * $container.height());
+
+			/*
+					Bind track drag event
+			----------------------------*/
+
+			/*
+					Bind track drag event
+			----------------------------*/
+			$track.bind('drag', function(e, ui){
+				clearTimeout(tid);
+				$track.show();
+				var offsetScrolled = - ui.position.top/ratio;
+				if( offsetScrolled < $container.height() - $content.height()){
+					offsetScrolled = $container.height() - $content.height();
+				}
+				$content.css('top', (offsetScrolled) + 'px');
+			});
+
+			$track.bind('dragstop', function(){
+				tid = setTimeout(function(){
+					$track.fadeOut();
+				}, 1500);
+			});
+
+			/*
+					Bind mousewheel
+			----------------------------*/
+			$(elem).find('.container, .trackHolder').bind('mousewheel', function(e, delta){
+				clearTimeout(tid);
+				var	value = (parseInt($content.css('top')) + delta*50),
+						ratioMove;
+
+				$track.show();
+
+				if(value > -25){
+					value = 0;
+				}
+				else if(value < ($container.height() - $content.height()) ){
+					value = $container.height() - $content.height();
+				}
+
+				$content.css('top', value + "px" );
+				ratioMove = value * ratio;
+				$track.css('top', -ratioMove + 'px');
+
+				tid = setTimeout(function(){
+					$track.fadeOut();
+				}, 1500);
+			});
+		});
+
+		$('.trackHolder').mouseenter(function(){
+			$(this).find('.track').show();
+		})
+
+		$('.trackHolder').mouseleave(function(){
+			$(this).find('.track:not(.ui-draggable-dragging)').fadeOut('slow');
+		})
+
+		$('.track').draggable({ axis: 'y',
+														containment: 'parent'
+													});
+	};
+
+	$(document).ready(function(){
+		setupScroll();
+		$(window).resize(setupScroll);
+	});
+	</script>
+</head>
+<body>
+<div class="overtop" >
+	<div class="container">
+		<div class="content" >
+			Sugar plum powder pie toffee apple pie gingerbread cotton candy powder. Pie candy canes powder macaroon pastry donut. Powder cheesecake sesame snaps lollipop candy canes chupa chups sweet soufflé. Jujubes chocolate dessert dragée dragée gummies. Apple pie dessert icing. Chupa chups donut chocolate. Cookie halvah chocolate pastry. Gummies cheesecake fruitcake cupcake. Gummies powder chupa chups pie sweet. Halvah wafer bonbon lemon drops cotton candy chocolate. Pastry cheesecake bear claw. Tart sweet applicake powder tart applicake gummies sesame snaps. Sweet roll biscuit fruitcake tootsie roll jelly beans candy canes topping. Donut donut donut.
+			Wypas liquorice icing candy sweet. Tiramisu marzipan icing. Wafer marshmallow apple pie chocolate bar bear claw tootsie roll. Pastry chocolate gummi bears jelly-o. Icing tiramisu cheesecake lemon drops. Sesame snaps icing gingerbread sugar plum gummies gingerbread chupa chups faworki. Sweet roll gummies chocolate. Danish jelly-o bonbon pie. Powder fruitcake gingerbread lemon drops faworki wypas ice cream muffin wypas. Pudding apple pie sugar plum sesame snaps candy canes. Brownie jelly fruitcake. Donut croissant caramels donut gummi bears topping brownie. Cupcake sugar plum lollipop faworki.
+			Jelly beans toffee bear claw liquorice danish ice cream apple pie sesame snaps. Sweet cookie macaroon. Sweet tiramisu macaroon macaroon halvah applicake marzipan. Oat cake toffee pastry wypas marshmallow jelly-o liquorice applicake. Liquorice powder chocolate cake tootsie roll brownie oat cake lollipop marzipan candy canes. Sweet roll chupa chups jelly beans sweet roll jelly beans cake pastry marzipan chocolate. Lemon drops candy canes wafer soufflé carrot cake sugar plum faworki powder. Pastry chocolate cake cotton candy. Chupa chups biscuit dragée chocolate bar sugar plum dragée. Dragée carrot cake lemon drops chocolate cake dragée tootsie roll topping gingerbread cheesecake. Powder croissant bear claw cheesecake gummi bears gummies donut gummies gingerbread. Ice cream apple pie pudding. Jujubes chocolate dessert biscuit. Croissant pudding sesame snaps wypas jujubes pie jelly-o.
+		</div>
+	</div>
+</div>
+<div class="overtop" >
+	<div class="container">
+		<div class="content" >
+			Sugar plum powder pie toffee apple pie gingerbread cotton candy powder. Pie candy canes powder macaroon pastry donut. Powder cheesecake sesame snaps lollipop candy canes chupa chups sweet soufflé. Jujubes chocolate dessert dragée dragée gummies. Apple pie dessert icing. Chupa chups donut chocolate. Cookie halvah chocolate pastry. Gummies cheesecake fruitcake cupcake. Gummies powder chupa chups pie sweet. Halvah wafer bonbon lemon drops cotton candy chocolate. Pastry cheesecake bear claw. Tart sweet applicake powder tart applicake gummies sesame snaps. Sweet roll biscuit fruitcake tootsie roll jelly beans candy canes topping. Donut donut donut.
+			Wypas liquorice icing candy sweet. Tiramisu marzipan icing. Wafer marshmallow apple pie chocolate bar bear claw tootsie roll. Pastry chocolate gummi bears jelly-o. Icing tiramisu cheesecake lemon drops. Sesame snaps icing gingerbread sugar plum gummies gingerbread chupa chups faworki. Sweet roll gummies chocolate. Danish jelly-o bonbon pie. Powder fruitcake gingerbread lemon drops faworki wypas ice cream muffin wypas. Pudding apple pie sugar plum sesame snaps candy canes. Brownie jelly fruitcake. Donut croissant caramels donut gummi bears topping brownie. Cupcake sugar plum lollipop faworki.
+			Jelly beans toffee bear claw liquorice danish ice cream apple pie sesame snaps. Sweet cookie macaroon. Sweet tiramisu macaroon macaroon halvah applicake marzipan. Oat cake toffee pastry wypas marshmallow jelly-o liquorice applicake. Liquorice powder chocolate cake tootsie roll brownie oat cake lollipop marzipan candy canes. Sweet roll chupa chups jelly beans sweet roll jelly beans cake pastry marzipan chocolate. Lemon drops candy canes wafer soufflé carrot cake sugar plum faworki powder. Pastry chocolate cake cotton candy. Chupa chups biscuit dragée chocolate bar sugar plum dragée. Dragée carrot cake lemon drops chocolate cake dragée tootsie roll topping gingerbread cheesecake. Powder croissant bear claw cheesecake gummi bears gummies donut gummies gingerbread. Ice cream apple pie pudding. Jujubes chocolate dessert biscuit. Croissant pudding sesame snaps wypas jujubes pie jelly-o.
+		</div>
+	</div>
+</div>
+</body>
+</html>

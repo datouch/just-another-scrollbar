@@ -4,7 +4,7 @@ just-another-scrollbar
 Just another scrollbar using jQuery, jQuery UI and Mousewheel plugin  
 It's lightweight you can try a demo by download the files  
   
-But I'll put it somewhere later, so you can test it online.  
+[Demo](http://datouch.github.com/just-another-scrollbar/)
   
 Tested on Chrome, Firefox
 

@@ -18,10 +18,6 @@
 			/*
 					Bind track drag event
 			----------------------------*/
-
-			/*
-					Bind track drag event
-			----------------------------*/
 			$track.bind('drag', function(e, ui){
 				clearTimeout(tid);
 				$track.show();

@@ -1,0 +1,32 @@
+.trackHolder {
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100%;
+	width: 20px;
+}
+
+.trackHolder .track {
+	width: 7px;
+	background: rgba(0,0,0, 0.5);
+	height: 10px;
+	border-radius: 5px;
+	position: absolute;
+	top: 1px;
+	right: 2px;
+	display: none;
+}
+
+.jas-relative {
+	position: relative;
+}
+
+.jas-container {
+	overflow: hidden;
+	height: 100%;
+}
+
+.jas-content {
+	top: 0;
+	position: relative;
+}

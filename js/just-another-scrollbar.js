@@ -2,7 +2,6 @@
 	setupScrollbar = function(that){
 		var $target = $(that);
 		$('<div class="trackHolder" ><div class="track" ></div></div>').appendTo($target.not(':has(.trackHolder)'));
-		$('.track').unbind();
 		$('.jas-container, .trackHolder').unbind();
 
 		$target.each(function(index, elem){
@@ -14,6 +13,8 @@
 					tid = 0;
 
 			if(ratio < 1){
+				$track.unbind('drag');
+				$track.unbind('dragstop');
 				$track.height(ratio * $container.height());
 				/*
 

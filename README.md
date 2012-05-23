@@ -53,6 +53,21 @@ Our focal point is this line
 $('.target').just_another_scrollbar();
 ```
 
+Events
+======
+There are 3 events available for us to utilize
+* hittop
+* hitbottom
+* scrolling
+  
+So if you want to alert when scroll hits the top of content you have to do something like this  
+```
+$('.target').bind('hittop', function(){
+  alert("Hey! let hit the bottom");
+});
+```
+we can do the same another 2 events just change *hittop* to any event name you want to capture  
+
 Caution
 =======
 If content going to contain any image, fixed size should be assigned because if we don't scrollbar height will be incorrectly calculated  

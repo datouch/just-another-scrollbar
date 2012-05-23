@@ -4,13 +4,13 @@
 		var $target = $(that);
 		$('<div class="trackHolder" ><div class="track" ></div></div>').appendTo($target.not(':has(.trackHolder)'));
 		$('.track').unbind();
-		$('.container, .trackHolder').unbind();
+		$('.jas-container, .trackHolder').unbind();
 
 		$target.each(function(index, elem){
 			var $elem = $(elem),
 					$track = $elem.find('.track'),
-					$content = $elem.find('.content'),
-					$container = $elem.find('.container'),
+					$content = $elem.find('.jas-content'),
+					$container = $elem.find('.jas-container'),
 					ratio = $container.height()/$content.height(),
 					tid = 0;
 			$track.height(ratio * $container.height());
@@ -37,7 +37,7 @@
 			/*
 					Bind mousewheel
 			----------------------------*/
-			$(elem).find('.container, .trackHolder').bind('mousewheel', function(e, delta){
+			$(elem).find('.jas-container, .trackHolder').bind('mousewheel', function(e, delta){
 				clearTimeout(tid);
 				var	value = (parseInt($content.css('top')) + delta*50),
 						ratioMove;

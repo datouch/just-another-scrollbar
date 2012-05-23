@@ -48,11 +48,14 @@
 					var	value = (parseInt($content.css('top')) + delta*50),
 							ratioMove;
 					$track.show();
+					$elem.trigger('scrolling');
 					if(value > -25){
 						value = 0;
+						$elem.trigger('hittop')''
 					}
 					else if(value < ($container.height() - $content.height()) ){
 						value = $container.height() - $content.height();
+						$elem.trigger('hitbottom');
 					}
 					$content.css('top', value + "px" );
 					ratioMove = value * ratio;

@@ -13,14 +13,15 @@
 					tid = 0;
 
 			if(ratio < 1){
-				$track.unbind('drag');
-				$track.unbind('dragstop');
+				$track.removeClass('greater-ratio');
 				$track.height(ratio * $container.height());
 				/*
 
 						Bind track drag event
 
 				----------------------------*/
+				$track.unbind('drag');
+				$track.unbind('dragstop');
 				$track.bind('drag', function(e, ui){
 					clearTimeout(tid);
 					$track.show();
@@ -63,12 +64,13 @@
 				});
 			}
 			else {
-				$track.remove();
+				$track.addClass('greater-ratio');
+				$content.css('top', '0px');
 			}
 		});
 
 		$('.jas-relative').mouseenter(function(){
-			$(this).find('.track').show();
+			$(this).find('.track:not(.greater-ratio)').show();
 		})
 
 		$('.jas-relative').mouseleave(function(){

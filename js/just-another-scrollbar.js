@@ -1,5 +1,4 @@
 (function($){
-
 	setupScrollbar = function(that){
 		var $target = $(that);
 		$('<div class="trackHolder" ><div class="track" ></div></div>').appendTo($target.not(':has(.trackHolder)'));
@@ -13,59 +12,65 @@
 					$container = $elem.find('.jas-container'),
 					ratio = $container.height()/$content.height(),
 					tid = 0;
-			$track.height(ratio * $container.height());
 
-			/*
-					Bind track drag event
-			----------------------------*/
-			$track.bind('drag', function(e, ui){
-				clearTimeout(tid);
-				$track.show();
-				var offsetScrolled = - ui.position.top/ratio;
-				if( offsetScrolled < $container.height() - $content.height()){
-					offsetScrolled = $container.height() - $content.height();
-				}
-				$content.css('top', (offsetScrolled) + 'px');
-			});
+			if(ratio < 1){
+				$track.height(ratio * $container.height());
+				/*
 
-			$track.bind('dragstop', function(){
-				tid = setTimeout(function(){
-					$track.fadeOut();
-				}, 1500);
-			});
+						Bind track drag event
 
-			/*
-					Bind mousewheel
-			----------------------------*/
-			$(elem).find('.jas-container, .trackHolder').bind('mousewheel', function(e, delta){
-				clearTimeout(tid);
-				var	value = (parseInt($content.css('top')) + delta*50),
-						ratioMove;
+				----------------------------*/
+				$track.bind('drag', function(e, ui){
+					clearTimeout(tid);
+					$track.show();
+					var offsetScrolled = - ui.position.top/ratio;
+					if( offsetScrolled < $container.height() - $content.height()){
+						offsetScrolled = $container.height() - $content.height();
+					}
+					$content.css('top', (offsetScrolled) + 'px');
+				});
 
-				$track.show();
+				$track.bind('dragstop', function(){
+					tid = setTimeout(function(){
+						$track.fadeOut();
+					}, 1500);
+				});
 
-				if(value > -25){
-					value = 0;
-				}
-				else if(value < ($container.height() - $content.height()) ){
-					value = $container.height() - $content.height();
-				}
+				/*
 
-				$content.css('top', value + "px" );
-				ratioMove = value * ratio;
-				$track.css('top', -ratioMove + 'px');
+						Bind mousewheel
 
-				tid = setTimeout(function(){
-					$track.fadeOut();
-				}, 1500);
-			});
+				----------------------------*/
+				$(elem).find('.jas-container, .trackHolder').bind('mousewheel', function(e, delta){
+					clearTimeout(tid);
+					var	value = (parseInt($content.css('top')) + delta*50),
+							ratioMove;
+					$track.show();
+					if(value > -25){
+						value = 0;
+					}
+					else if(value < ($container.height() - $content.height()) ){
+						value = $container.height() - $content.height();
+					}
+					$content.css('top', value + "px" );
+					ratioMove = value * ratio;
+					$track.css('top', -ratioMove + 'px');
+
+					tid = setTimeout(function(){
+						$track.fadeOut();
+					}, 1500);
+				});
+			}
+			else {
+				$track.remove();
+			}
 		});
 
-		$('.trackHolder').mouseenter(function(){
+		$('.jas-relative').mouseenter(function(){
 			$(this).find('.track').show();
 		})
 
-		$('.trackHolder').mouseleave(function(){
+		$('.jas-relative').mouseleave(function(){
 			$(this).find('.track:not(.ui-draggable-dragging)').fadeOut('slow');
 		})
 

@@ -22,6 +22,7 @@
 				----------------------------*/
 				$track.unbind('drag');
 				$track.unbind('dragstop');
+				$track.unbind('dragstart');
 				$track.bind('drag', function(e, ui){
 					clearTimeout(tid);
 					$track.show();
@@ -30,12 +31,18 @@
 						offsetScrolled = $container.height() - $content.height();
 					}
 					$content.css('top', (offsetScrolled) + 'px');
+					e.stopPropagation();
 				});
 
-				$track.bind('dragstop', function(){
+				$track.bind('dragstop', function(e){
 					tid = setTimeout(function(){
 						$track.fadeOut();
 					}, 1500);
+					e.stopPropagation();
+				});
+				
+				$track.bind('dragstart', function(e){
+					e.stopPropagation();	
 				});
 
 				/*

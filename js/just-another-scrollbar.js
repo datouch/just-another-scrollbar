@@ -58,7 +58,7 @@
 					$elem.trigger('scrolling');
 					if(value > -25){
 						value = 0;
-						$elem.trigger('hittop')''
+						$elem.trigger('hittop');
 					}
 					else if(value < ($container.height() - $content.height()) ){
 						value = $container.height() - $content.height();
@@ -88,7 +88,7 @@
 		})
 
 		$('.track').draggable({ axis: 'y',
-														containment: 'parent'
+			containment: 'parent'
 		});
 	};
 

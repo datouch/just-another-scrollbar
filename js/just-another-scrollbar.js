@@ -10,7 +10,12 @@
 					$container = $elem.find('.jas-container'),
 					ratio = $container.height()/$content.height(),
 					tid = 0;
-
+			// Unbind old event handler
+			$elem.find('.jas-container, .trackHolder').unbind('mousewheel');
+			$track.unbind('drag');
+			$track.unbind('dragstop');
+			$track.unbind('dragstart');
+			// If content size is larger than container
 			if(ratio < 1){
 				$track.removeClass('greater-ratio');
 				$track.height(ratio * $container.height());
@@ -19,10 +24,6 @@
 						Bind track drag event
 
 				----------------------------*/
-				$elem.find('.jas-container, .trackHolder').unbind('mousewheel');
-				$track.unbind('drag');
-				$track.unbind('dragstop');
-				$track.unbind('dragstart');
 				$track.bind('drag', function(e, ui){
 					clearTimeout(tid);
 					$track.show();

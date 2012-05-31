@@ -2,7 +2,6 @@
 	setupScrollbar = function(that){
 		var $target = $(that);
 		$('<div class="trackHolder" ><div class="track" ></div></div>').appendTo($target.not(':has(.trackHolder)'));
-		$('.jas-container, .trackHolder').unbind();
 
 		$target.each(function(index, elem){
 			var $elem = $(elem),
@@ -20,6 +19,7 @@
 						Bind track drag event
 
 				----------------------------*/
+				$elem.find('.jas-container, .trackHolder').unbind('mousewheel');
 				$track.unbind('drag');
 				$track.unbind('dragstop');
 				$track.unbind('dragstart');

@@ -8,8 +8,7 @@
 					$track = $elem.find('.track'),
 					$content = $elem.find('.jas-content'),
 					$container = $elem.find('.jas-container'),
-					ratio = $container.height()/$content.height(),
-					tid = 0;
+					ratio = $container.height()/$content.height();
 			// Unbind old event handler
 			$elem.find('.jas-container, .trackHolder').unbind('mousewheel');
 			$track.unbind('drag');
@@ -25,8 +24,6 @@
 
 				----------------------------*/
 				$track.bind('drag', function(e, ui){
-					clearTimeout(tid);
-					$track.show();
 					var offsetScrolled = - ui.position.top/ratio;
 					if( offsetScrolled < $container.height() - $content.height()){
 						offsetScrolled = $container.height() - $content.height();
@@ -36,9 +33,6 @@
 				});
 
 				$track.bind('dragstop', function(e){
-					tid = setTimeout(function(){
-						$track.fadeOut();
-					}, 1500);
 					e.stopPropagation();
 				});
 				
@@ -52,7 +46,6 @@
 
 				----------------------------*/
 				$(elem).find('.jas-container, .trackHolder').bind('mousewheel', function(e, delta){
-					clearTimeout(tid);
 					var	value = (parseInt($content.css('top')) + delta*50),
 							ratioMove;
 					$track.show();
@@ -68,10 +61,6 @@
 					$content.css('top', value + "px" );
 					ratioMove = value * ratio;
 					$track.css('top', -ratioMove + 'px');
-
-					tid = setTimeout(function(){
-						$track.fadeOut();
-					}, 1500);
 				});
 			}
 			else {

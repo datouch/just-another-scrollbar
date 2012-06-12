@@ -81,7 +81,7 @@
 		});
 
 		$('.jas-relative').mouseenter(function(){
-			$(this).find('.track:not(.greater-ratio)').show();
+			$(this).find('.track:not(.greater-ratio)').stop(false, true).show();
 		})
 
 		$('.jas-relative').mouseleave(function(){
